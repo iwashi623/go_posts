@@ -23,7 +23,7 @@ func (ps *PostStore) Create(p *entity.Post) (entity.PostID, error) {
 	return p.ID, nil
 }
 
-func (ps *PostStore) All(p *entity.Post) entity.Posts {
+func (ps *PostStore) All() entity.Posts {
 	posts := make([]*entity.Post, len(ps.Posts))
 	for i, p := range ps.Posts {
 		posts[i-1] = p
