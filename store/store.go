@@ -7,8 +7,7 @@ import (
 )
 
 var (
-	Posts = &PostStore{Posts: map[entity.PostID]*entity.Post{}}
-
+	Posts       = &PostStore{Posts: map[entity.PostID]*entity.Post{}}
 	ErrNotFound = errors.New("not found")
 )
 

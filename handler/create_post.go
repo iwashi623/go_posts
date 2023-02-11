@@ -11,7 +11,7 @@ import (
 )
 
 type CreatePost struct {
-	PostStore *store.PostStore
+	Store     *store.PostStore
 	Validator *validator.Validate
 }
 
@@ -38,7 +38,7 @@ func (cp *CreatePost) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		Status:    entity.PostStatusDraft,
 		CreatedAt: time.Now(),
 	}
-	id, err := cp.PostStore.Create(p)
+	id, err := cp.Store.Create(p)
 	if err != nil {
 		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),
