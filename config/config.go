@@ -3,8 +3,8 @@ package config
 import "github.com/caarlos0/env"
 
 type Config struct {
-	Env  string `env:APP_ENV envDefault:dev`
-	Port int    `env:PORT envDefault:80`
+	Env  string `env:"APP_ENV" envDefault:"dev"`
+	Port int    `env:"PORT" envDefault:"80"`
 }
 
 func New() (*Config, error) {
