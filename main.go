@@ -7,6 +7,9 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/iwashi623/go_posts/config"
 	"golang.org/x/sync/errgroup"
@@ -20,6 +23,10 @@ func main() {
 }
 
 func run(ctx context.Context) error {
+
+	ctx, stop := signal.NotifyContext(ctx, os.Interrupt, syscall.SIGTERM)
+	defer stop()
+
 	cfg, err := config.New()
 	if err != nil {
 		return err
@@ -51,6 +58,8 @@ func run(ctx context.Context) error {
 
 	<-ctx.Done()
 	if err := s.Shutdown(context.Background()); err != nil {
+		// コマンドライン実験用
+		time.Sleep(3 * time.Second)
 		log.Printf("failed to shutdown: %v", err)
 	}
 
