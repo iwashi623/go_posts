@@ -24,6 +24,7 @@ func (cp *CreatePost) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),
 		}, http.StatusInternalServerError)
+		return
 	}
 
 	err := cp.Validator.Struct(b)
@@ -31,6 +32,7 @@ func (cp *CreatePost) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),
 		}, http.StatusBadRequest)
+		return
 	}
 
 	p := &entity.Post{
@@ -43,6 +45,7 @@ func (cp *CreatePost) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),
 		}, http.StatusInternalServerError)
+		return
 	}
 
 	res := struct {
