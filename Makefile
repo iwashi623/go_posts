@@ -24,6 +24,12 @@ ps: ## Show the docker container status
 test: ## Run the test
 	go test -race -shuffle=on ./...
 
+dry-migrate: ## Try migration
+	mysqldef -u app -p app -h 127.0.0.1 -P 33306 go_posts --dry-run < ./mysql/schema.sql
+
+migrate:  ## Execute migration
+	mysqldef -u app -p app -h 127.0.0.1 -P 33306 go_posts < ./mysql/schema.sql
+
 help: ## Show option
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
