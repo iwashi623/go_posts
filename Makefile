@@ -25,10 +25,10 @@ test: ## Run the test
 	go test -race -shuffle=on ./...
 
 dry-migrate: ## Try migration
-	mysqldef -u todo -p todo -h 127.0.0.1 -P 33306 todo --dry-run < ./mysql/schema.sql
+	mysqldef -u app -p app -h 127.0.0.1 -P 33306 go_posts --dry-run < ./mysql/schema.sql
 
 migrate:  ## Execute migration
-	mysqldef -u todo -p todo -h 127.0.0.1 -P 33306 todo < ./mysql/schema.sql
+	mysqldef -u app -p app -h 127.0.0.1 -P 33306 go_posts < ./mysql/schema.sql
 
 help: ## Show option
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
