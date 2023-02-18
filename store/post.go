@@ -15,7 +15,7 @@ func (r *Repository) ListPosts(ctx context.Context, db Queryer) (entity.Posts, e
 	return posts, nil
 }
 
-func (r *Repository) AddPost(ctx context.Context, db Execer, p *entity.Post) error {
+func (r *Repository) CreatePost(ctx context.Context, db Execer, p *entity.Post) error {
 	p.CreatedAt = r.Clocker.Now()
 	p.UpdatedAt = r.Clocker.Now()
 	sql := `INSERT INTO post

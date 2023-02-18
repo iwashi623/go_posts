@@ -20,9 +20,9 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: go_posts
-          MYSQL_USER: app
-          MYSQL_PASSWORD: app
+          MYSQL_DATABASE: posts
+          MYSQL_USER: posts
+          MYSQL_PASSWORD: posts
     steps:
       - uses: actions/setup-go@v3
         with:
@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           go install github.com/k0kubun/sqldef/cmd/mysqldef@latest
-          mysqldef -u app -p app -h 127.0.0.1 -P 3306 go_posts < ./mysql/schema.sql
+          mysqldef -u posts -p posts -h 127.0.0.1 -P 3306 posts < ./mysql/schema.sql
       - run: go test ./... -coverprofile=coverage.out
       - name: report coverage
         uses: k1LoW/octocov-action@v0

@@ -19,7 +19,7 @@ func OpenDBForTest(t *testing.T) *sqlx.DB {
 	}
 	db, err := sql.Open(
 		"mysql",
-		fmt.Sprintf("app:app@tcp(127.0.0.1:%d)/go_posts?parseTime=true", port),
+		fmt.Sprintf("posts:posts@tcp(127.0.0.1:%d)/posts?parseTime=true", port),
 	)
 	if err != nil {
 		t.Fatal(err)
