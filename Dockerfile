@@ -1,4 +1,4 @@
-# デプロイ用コンテナ煮含めるバイナリを作成するコンテナ
+# デプロイ用コンテナに含めるバイナリを作成するコンテナ
 FROM  golang:1.18.2-bullseye as deploy-builder
 
 WORKDIR /app

@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/google/go-cmp/cmp"
 	"github.com/iwashi623/go_posts/clock"
 	"github.com/iwashi623/go_posts/entity"
@@ -83,7 +84,7 @@ func preparePosts(ctx context.Context, t *testing.T, tx *sqlx.Tx) entity.Posts {
 	return posts
 }
 
-func TestRepository_AddPost(t *testing.T) {
+func TestRepository_CreatePost(t *testing.T) {
 	t.Parallel()
 	ctx := context.Background()
 
@@ -109,7 +110,7 @@ func TestRepository_AddPost(t *testing.T) {
 
 	xdb := sqlx.NewDb(db, "mysql")
 	r := &Repository{Clocker: c}
-	if err := r.AddPost(ctx, xdb, okPost); err != nil {
-		t.Fatalf("failed to AddPost: %s", err)
+	if err := r.CreatePost(ctx, xdb, okPost); err != nil {
+		t.Fatalf("failed to CreatePost: %s", err)
 	}
 }
